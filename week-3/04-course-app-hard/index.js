@@ -9,13 +9,17 @@ const app = express();
 const PORT = 3000;
 
 const jwtSecret = 'dev-jwt-secret';
+
+const { mongoUrl } = require('./config');
+
+console.log(mongoUrl, 'mongo');
 const { Admin, Course, User } = require('./models');
 
 app.use(cors());
 app.use(bodyParser.json());
 
 mongoose
-  .connect('mongodb://localhost/courses')
+  .connect(mongoUrl)
   .then(() => {
     console.log('connected to mongo');
   })
